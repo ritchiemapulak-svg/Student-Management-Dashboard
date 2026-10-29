@@ -1,7 +1,17 @@
+/**
+ * Simulates a GET request.
+ * @returns {Array} the current list of students
+ */
 export function getStudentsAPI(){ 
     return mockStudentDb;
 }
 
+/**
+ * Simulates a POST request.
+ * Adds a unique id to the student data, saves it, and returns the saved student.
+ * @param {Object} newStudentData - { firstName, lastName, email }
+ * @returns {Object} the saved student, including its generated id
+ */
 export function addStudentsAPI(newStudentData){
     const savedStudent = {
         id: Date.now(),
@@ -11,20 +21,23 @@ export function addStudentsAPI(newStudentData){
     return savedStudent;
 }
 
+// The student database. 
 const mockStudentDb = [
-    {
-        id: Date.now() + 1,
-        firstName : "Ritchie",
-        lastName : "Mapulak",
-        email : "ritchie.mapulak@awsys-i.com"
-    } , 
+    // {
+    //     id: Date.now() + 1,
+    //     firstName : "Ritchie",
+    //     lastName : "Mapulak",
+    //     email : "ritchie.mapulak@awsys-i.com"
+    // } , 
 
-    {
-        id: Date.now() + 2,
-        firstName : "Rosalie",
-        lastName : "Carcueva",
-        email : "rosalie.carcueva@awsys-i.com"
-    }];
+    // {
+    //     id: Date.now() + 2,
+    //     firstName : "Rosalie",
+    //     lastName : "Carcueva",
+    //     email : "rosalie.carcueva@awsys-i.com"
+    // }
+    ];
+
 
 
 
