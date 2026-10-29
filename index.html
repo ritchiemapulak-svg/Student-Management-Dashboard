@@ -1,262 +1,287 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Management Dashboard</title>
     <style>
-        /* ---------- Design tokens ---------- */
-        :root {
-            --color-bg: #f1f5f9;
-            --color-surface: #ffffff;
-            --color-text: #0f172a;
-            --color-muted: #64748b;
-            --color-border: #e2e8f0;
-            --color-primary: #4f46e5;
-            --color-primary-hover: #4338ca;
-            --color-row-hover: #f8fafc;
-            --color-table-head: #f8fafc;
- 
-            --radius: 12px;
-            --radius-sm: 8px;
-            --shadow: 0 1px 3px rgba(15, 23, 42, 0.06),
-                      0 8px 24px rgba(15, 23, 42, 0.06);
-            --space: 24px;
-        }
- 
-        /* ---------- Base ---------- */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
- 
-        body {
-            margin: 0;
-            padding: 48px 24px;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.5;
-            color: var(--color-text);
-            background-color: var(--color-bg);
-        }
- 
-        h1, h2, h3 {
-            margin: 0;
-            line-height: 1.25;
-        }
- 
-        /* ---------- Page header ---------- */
-        .page-title {
-            max-width: 1000px;
-            margin: 0 auto 32px;
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            text-align: center;
-        }
- 
-        /* ---------- Layout ---------- */
-        .dashboard-container {
-            display: grid;
-            grid-template-columns: minmax(260px, 1fr) 2fr;
-            gap: var(--space);
-            max-width: 1000px;
-            margin: 0 auto;
-            align-items: stretch;   /* both panels share the row height set by the form */
-        }
- 
-        .panel {
-            display: flex;
-            flex-direction: column;
-            min-height: 0;          /* lets the table area shrink and scroll */
-            padding: var(--space);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
- 
-        .panel h3 {
-            margin-bottom: 20px;
-            font-size: 1.125rem;
-            font-weight: 600;
-        }
- 
-        /* ---------- Form ---------- */
-        .form-group {
-            margin-bottom: 16px;
-        }
- 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
- 
-        input {
-            width: 100%;
-            padding: 10px 12px;
-            font: inherit;
-            color: inherit;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
- 
-        input::placeholder {
-            color: #94a3b8;
-        }
- 
-        input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
- 
-        button {
-            width: 100%;
-            padding: 11px 16px;
-            font: inherit;
-            font-weight: 600;
-            color: #fff;
-            background-color: var(--color-primary);
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: background-color 0.15s, transform 0.05s;
-        }
- 
-        button:hover {
-            background-color: var(--color-primary-hover);
-        }
- 
-        button:active {
-            transform: scale(0.98);
-        }
- 
-        button:focus-visible {
-            outline: 3px solid rgba(79, 70, 229, 0.4);
-            outline-offset: 2px;
-        }
- 
-        /* ---------- Table ---------- */
-        /* The wrapper fills the space under the heading, but the table inside is
+      /* ---------- Design tokens ---------- */
+      :root {
+        --color-bg: #f1f5f9;
+        --color-surface: #ffffff;
+        --color-text: #0f172a;
+        --color-muted: #64748b;
+        --color-border: #e2e8f0;
+        --color-primary: #4f46e5;
+        --color-primary-hover: #4338ca;
+        --color-row-hover: #f8fafc;
+        --color-table-head: #f8fafc;
+
+        --radius: 12px;
+        --radius-sm: 8px;
+        --shadow:
+          0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+        --space: 24px;
+      }
+
+      /* ---------- Base ---------- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 48px 24px;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        line-height: 1.5;
+        color: var(--color-text);
+        background-color: var(--color-bg);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.25;
+      }
+
+      /* ---------- Page header ---------- */
+      .page-title {
+        max-width: 1000px;
+        margin: 0 auto 32px;
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-align: center;
+      }
+
+      /* ---------- Layout ---------- */
+      .dashboard-container {
+        display: grid;
+        grid-template-columns: minmax(260px, 1fr) 2fr;
+        gap: var(--space);
+        max-width: 1000px;
+        margin: 0 auto;
+        align-items: stretch; /* both panels share the row height set by the form */
+      }
+
+      .panel {
+        display: flex;
+        flex-direction: column;
+        min-height: 0; /* lets the table area shrink and scroll */
+        padding: var(--space);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .panel h3 {
+        margin-bottom: 20px;
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      /* ---------- Form ---------- */
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        font: inherit;
+        color: inherit;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+
+      input::placeholder {
+        color: #94a3b8;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
+
+      button {
+        width: 100%;
+        padding: 11px 16px;
+        font: inherit;
+        font-weight: 600;
+        color: #fff;
+        background-color: var(--color-primary);
+        border: none;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition:
+          background-color 0.15s,
+          transform 0.05s;
+      }
+
+      button:hover {
+        background-color: var(--color-primary-hover);
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      button:focus-visible {
+        outline: 3px solid rgba(79, 70, 229, 0.4);
+        outline-offset: 2px;
+      }
+
+      /* ---------- Table ---------- */
+      /* The wrapper fills the space under the heading, but the table inside is
            absolutely positioned, so its rows never make the panel taller. The
            panel height is therefore decided only by the form. */
+      .table-wrap {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .table-scroll {
+        position: absolute;
+        inset: 0;
+        overflow: auto; /* rows scroll inside the panel */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9375rem;
+      }
+
+      th,
+      td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      th {
+        position: sticky; /* header stays visible while scrolling */
+        top: 0;
+        z-index: 1;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--color-muted);
+        background-color: var(--color-table-head);
+      }
+
+      th:first-child,
+      td:first-child {
+        width: 48px;
+        color: var(--color-muted);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background-color: var(--color-row-hover);
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 16px;
+        }
+
+        .dashboard-container {
+          grid-template-columns: 1fr; /* stack form above table */
+        }
+
         .table-wrap {
-            position: relative;
-            flex: 1;
-            min-height: 0;
+          flex: none;
+          height: 360px; /* stacked panels need their own table height */
         }
- 
-        .table-scroll {
-            position: absolute;
-            inset: 0;
-            overflow: auto;         /* rows scroll inside the panel */
-        }
- 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9375rem;
-        }
- 
-        th,
-        td {
-            padding: 12px 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--color-border);
-        }
- 
-        th {
-            position: sticky;       /* header stays visible while scrolling */
-            top: 0;
-            z-index: 1;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--color-muted);
-            background-color: var(--color-table-head);
-        }
- 
-        th:first-child,
-        td:first-child {
-            width: 48px;
-            color: var(--color-muted);
-        }
- 
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
- 
-        tbody tr:hover {
-            background-color: var(--color-row-hover);
-        }
- 
-        /* ---------- Responsive ---------- */
-        @media (max-width: 768px) {
-            body {
-                padding: 24px 16px;
-            }
- 
-            .dashboard-container {
-                grid-template-columns: 1fr;   /* stack form above table */
-            }
- 
-            .table-wrap {
-                flex: none;
-                height: 360px;        /* stacked panels need their own table height */
-            }
-        }
+      }
     </style>
-</head>
-<body>
- 
+  </head>
+  <body>
     <h1 class="page-title">Student Management Dashboard</h1>
- 
+
     <div class="dashboard-container">
-        <section class="panel">
-            <h3>Add New Student</h3>
-            <form id="studentForm" novalidate>
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" placeholder="e.g. Viktor" autocomplete="given-name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" placeholder="e.g. Magtatanggol" autocomplete="family-name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="viktor.magtatanggol@example.com" autocomplete="email">
-                </div>
-                <button type="submit">Submit Record</button>
-            </form>
-        </section>
- 
-        <section class="panel">
-            <h3>Registered Students</h3>
-            <div class="table-wrap">
-                <div class="table-scroll">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+      <section class="panel">
+        <h3>Add New Student</h3>
+        <form id="studentForm" novalidate>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="e.g. Viktor"
+              autocomplete="given-name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              placeholder="e.g. Magtatanggol"
+              autocomplete="family-name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="viktor.magtatanggol@example.com"
+              autocomplete="email"
+            />
+          </div>
+          <button type="submit">Submit Record</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h3>Registered Students</h3>
+        <div class="table-wrap">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </div>
- 
+
     <script src="app.js" type="module"></script>
-</body>
+  </body>
 </html>
