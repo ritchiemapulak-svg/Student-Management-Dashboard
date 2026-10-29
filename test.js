@@ -1,11 +1,10 @@
 import {getStudentsAPI, addStudentsAPI} from "./api.js";
 
-// Test 1: display the initial populated database
+//Test 1 - Display the initial populated database.
 console.log("Test 1");
 console.log(getStudentsAPI());
 
-// Test 2: create a new student and 
-// display the saved object returned by the API
+//Test 2 - Display the newly added student.
 console.log(`
 Test 2  `);
 const newStudent = addStudentsAPI({
@@ -15,8 +14,7 @@ email : "joseph.albarina@awsys-i.com",
 });
 console.log(`Returned Saved Object : ` , newStudent);
 
-// Test 3: display the updated database 
-// (should now include the new student)
+//Test 3 - Display the updated database.
 console.log(`
 Test 3 `)
 console.log(`Updated DB State : `, getStudentsAPI());
